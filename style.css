@@ -1,0 +1,520 @@
+/* ========================================
+   RESET & BASE STYLES
+   ======================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* Light Mode Variables */
+    --bg-gradient-1: #667eea;
+    --bg-gradient-2: #764ba2;
+    --card-bg: rgba(255, 255, 255, 0.95);
+    --text-primary: #333;
+    --text-secondary: #666;
+    --counter-color: #764ba2;
+    --counter-positive: #43e97b;
+    --counter-negative: #f5576c;
+    --btn-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --btn-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    --btn-warning: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+    --btn-success: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+    --stat-card-bg: #f8f9fa;
+    --stat-text: #666;
+    --shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --border-color: rgba(0, 0, 0, 0.1);
+    --input-bg: white;
+    --input-border: #ddd;
+}
+
+body.dark-mode {
+    /* Dark Mode Variables */
+    --bg-gradient-1: #1a1a2e;
+    --bg-gradient-2: #16213e;
+    --card-bg: rgba(30, 30, 40, 0.95);
+    --text-primary: #f0f0f0;
+    --text-secondary: #ccc;
+    --counter-color: #9b59b6;
+    --counter-positive: #2ecc71;
+    --counter-negative: #e74c3c;
+    --stat-card-bg: rgba(255, 255, 255, 0.1);
+    --stat-text: #ccc;
+    --shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    --border-color: rgba(255, 255, 255, 0.1);
+    --input-bg: #2a2a3e;
+    --input-border: #4a4a5e;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, var(--bg-gradient-1) 0%, var(--bg-gradient-2) 100%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    transition: var(--transition);
+    position: relative;
+}
+
+/* ========================================
+   DARK MODE TOGGLE BUTTON
+   ======================================== */
+.dark-mode-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    background: var(--card-bg);
+    border: 2px solid var(--border-color);
+    font-size: 24px;
+    cursor: pointer;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: var(--transition);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dark-mode-toggle:hover {
+    transform: rotate(15deg) scale(1.1);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* ========================================
+   MAIN CONTAINER
+   ======================================== */
+.container {
+    background: var(--card-bg);
+    backdrop-filter: blur(10px);
+    border-radius: 30px;
+    padding: 40px;
+    box-shadow: var(--shadow);
+    text-align: center;
+    max-width: 650px;
+    width: 100%;
+    margin-bottom: 40px;
+    transition: var(--transition);
+    animation: fadeInUp 0.6s ease;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.4);
+}
+
+/* ========================================
+   TITLE STYLES
+   ======================================== */
+.title {
+    color: var(--text-primary);
+    margin-bottom: 30px;
+    font-size: 2.5em;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.title-icon {
+    font-size: 1em;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+/* ========================================
+   COUNTER DISPLAY
+   ======================================== */
+.counter-wrapper {
+    margin: 30px 0;
+}
+
+.counter-card {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+    border-radius: 20px;
+    padding: 30px;
+    transition: var(--transition);
+}
+
+.counter-label {
+    font-size: 1.1em;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+}
+
+.counter-value {
+    font-size: 5em;
+    font-weight: bold;
+    color: var(--counter-color);
+    transition: var(--transition);
+    animation: pulse 0.3s ease;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+/* ========================================
+   BUTTON STYLES
+   ======================================== */
+.buttons-grid {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 12px 28px;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: var(--transition);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn:active::before {
+    width: 300px;
+    height: 300px;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.btn-icon {
+    font-size: 18px;
+}
+
+.btn-primary {
+    background: var(--btn-primary);
+    color: white;
+}
+
+.btn-secondary {
+    background: var(--btn-secondary);
+    color: white;
+}
+
+.btn-warning {
+    background: var(--btn-warning);
+    color: #333;
+}
+
+.btn-success {
+    background: var(--btn-success);
+    color: #333;
+}
+
+/* ========================================
+   EDIT SECTION
+   ======================================== */
+.edit-section {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.input-group {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+}
+
+.custom-input {
+    padding: 12px 20px;
+    font-size: 16px;
+    border: 2px solid var(--input-border);
+    border-radius: 50px;
+    outline: none;
+    transition: var(--transition);
+    width: 180px;
+    text-align: center;
+    background: var(--input-bg);
+    color: var(--text-primary);
+}
+
+.custom-input:focus {
+    border-color: #764ba2;
+    box-shadow: 0 0 0 3px rgba(118, 75, 162, 0.2);
+}
+
+.input-hint {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-top: 8px;
+}
+
+/* ========================================
+   STATISTICS DASHBOARD
+   ======================================== */
+.stats-dashboard {
+    margin-top: 20px;
+}
+
+.stats-title {
+    color: var(--text-primary);
+    margin-bottom: 20px;
+    font-size: 1.3em;
+}
+
+.stats-grid {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.stat-card {
+    background: var(--stat-card-bg);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 20px;
+    flex: 1;
+    min-width: 120px;
+    text-align: center;
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.stat-icon {
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+.stat-label {
+    font-size: 12px;
+    color: var(--stat-text);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+}
+
+.stat-value {
+    font-size: 1.8em;
+    font-weight: bold;
+    color: var(--counter-color);
+}
+
+/* ========================================
+   FOOTER STYLES
+   ======================================== */
+.footer {
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 30px;
+    text-align: center;
+    max-width: 650px;
+    width: 100%;
+    transition: var(--transition);
+}
+
+.footer-content {
+    color: white;
+}
+
+.footer-title {
+    font-size: 1.5em;
+    margin-bottom: 15px;
+}
+
+.footer-description {
+    font-size: 0.9em;
+    margin-bottom: 15px;
+    opacity: 0.9;
+    line-height: 1.6;
+}
+
+.footer-divider {
+    width: 50px;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.3);
+    margin: 15px auto;
+}
+
+.developer-info {
+    margin: 10px 0;
+    font-size: 0.9em;
+}
+
+.copyright {
+    font-size: 0.8em;
+    opacity: 0.7;
+}
+
+.footer-links {
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.footer-link {
+    color: white;
+    text-decoration: none;
+    font-size: 0.85em;
+    transition: var(--transition);
+}
+
+.footer-link:hover {
+    text-decoration: underline;
+    opacity: 0.8;
+}
+
+.footer-separator {
+    opacity: 0.5;
+}
+
+/* ========================================
+   ACCESSIBILITY & FOCUS STATES
+   ======================================== */
+.btn:focus-visible,
+.custom-input:focus-visible,
+.dark-mode-toggle:focus-visible {
+    outline: 3px solid #764ba2;
+    outline-offset: 3px;
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+@media (max-width: 768px) {
+    .container {
+        padding: 30px 20px;
+    }
+
+    .title {
+        font-size: 1.8em;
+    }
+
+    .counter-value {
+        font-size: 3.5em;
+    }
+
+    .btn {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+
+    .stat-card {
+        min-width: 100px;
+        padding: 15px;
+    }
+
+    .stat-value {
+        font-size: 1.5em;
+    }
+
+    .footer {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .buttons-grid {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .input-group {
+        flex-direction: column;
+    }
+
+    .custom-input {
+        width: 100%;
+    }
+
+    .stats-grid {
+        flex-direction: column;
+    }
+
+    .stat-card {
+        width: 100%;
+    }
+}
+
+/* ========================================
+   ANIMATIONS & UTILITIES
+   ======================================== */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+.shake {
+    animation: shake 0.3s ease;
+}
